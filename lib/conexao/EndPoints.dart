@@ -1,11 +1,12 @@
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'dart:async';
 import 'dart:io';
 import 'package:apireq/car/CarListModel.dart';
 import 'package:http/http.dart' as http;
-import 'package:connectivity/connectivity.dart';
+//import 'package:connectivity/connectivity.dart';
 import 'package:apireq/car/CarModel.dart';
 
 //Apenas para verificar se foi passado parametro ou não para a função
