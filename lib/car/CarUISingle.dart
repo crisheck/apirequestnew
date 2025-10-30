@@ -63,7 +63,7 @@ class _CarUISingle extends State {
                   break;
                 }
             }
-            throw "Error";
+            return noDataView("Estado desconhecido");
           }),
     );
   }

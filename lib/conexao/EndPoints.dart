@@ -17,8 +17,8 @@ const String _noValueGiven = "";
 String beers = "https://api.punkapi.com/v2/beers";
 
 //Para quem o emulador estiver funcionando o acesso a internet, usar o ip 10.0.2.2
-String carGet = "http://172.16.2.120/apiflutter/list";
-String carPost = "http://172.16.2.120/apiflutter/store";
+String carGet = "http://10.0.2.2/apiflutter/list";
+String carPost = "http://10.0.2.2/apiflutter/store";
 // Aqui usamos o package http para carregar os dados da API
 
 
@@ -35,7 +35,11 @@ Future<CarListModel> getCarListData([String id = _noValueGiven]) async {
     );
   }
   //json.decode usado para decodificar o response.body(string to map)
+ if (response.statusCode == 200) {
   return CarListModel.fromJson(json.decode(response.body));
+} else {
+  throw Exception('Erro ${response.statusCode}: ${response.body}');
+}
 }
 
 Future<http.Response> createPost(CarModel car, String url) async {
@@ -92,9 +96,9 @@ Future<CarListModel> callAPI(CarModel car) async {
 // método para definir se há conexão com a internet
 Future<bool> isConnected() async {
   var connectivityResult = await (Connectivity().checkConnectivity());
-  if (connectivityResult == ConnectivityResult.mobile) {
+  if (connectivityResult[0] == ConnectivityResult.mobile) {
     return true;
-  } else if (connectivityResult == ConnectivityResult.wifi) {
+  } else if (connectivityResult[0] == ConnectivityResult.wifi) {
     return true;
   }
   return false;
